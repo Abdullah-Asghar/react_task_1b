@@ -116,7 +116,35 @@ export default function MkdSDK() {
   };
 
   this.check = async function (role) {
-    //TODO
+    const header = {
+      "x-project": base64Encode,
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    };
+
+    const getResult = await fetch(
+      this._baseurl + `/v2/api/lambda/check`,
+      {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          role: role,
+        }),
+      }
+    );
+
+    const jsonGet = await getResult.json();
+
+    if (getResult.status === 401) {
+      throw new Error(jsonGet.message);
+    }
+
+    if (getResult.status === 403) {
+      throw new Error(jsonGet.message);
+    }
+
+    return jsonGet;
   };
 
   return this;
