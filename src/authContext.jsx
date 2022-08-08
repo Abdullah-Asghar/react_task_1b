@@ -46,10 +46,19 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+
   React.useEffect(() => {
-    
     //TODO
-  }, []);
+    let sdk = new MkdSDK();
+    const role = localStorage.getItem("role");
+    const userToken = sdk.login(data.email, data.password, 'admin');
+    if (userToken && userToken.message === 'TOKEN_EXPIRED') {
+      dispatch({
+        type: "Logout",
+      });
+      window.location.href = "/" + role + "/login";
+    }
+  }, [userToken]);
 
   return (
     <AuthContext.Provider
