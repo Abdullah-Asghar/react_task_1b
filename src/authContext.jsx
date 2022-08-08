@@ -13,7 +13,9 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      //TODO
+      localStorage.setItem('token', state.token);
+      localStorage.setItem('role', state.role);
+      localStorage.setItem('user_id', state.user_id);
       return {
         ...state,
       };
@@ -45,6 +47,7 @@ const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   React.useEffect(() => {
+    
     //TODO
   }, []);
 
