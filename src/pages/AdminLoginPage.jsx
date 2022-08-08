@@ -28,6 +28,7 @@ const AdminLoginPage = () => {
   const onSubmit = async (data) => {
     let sdk = new MkdSDK();
     //TODO
+    const userData = sdk.login(data.email, data.password, 'admin');
   };
 
   return (
@@ -47,9 +48,8 @@ const AdminLoginPage = () => {
             type="email"
             placeholder="Email"
             {...register("email")}
-            className={`"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-              errors.email?.message ? "border-red-500" : ""
-            }`}
+            className={`"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email?.message ? "border-red-500" : ""
+              }`}
           />
           <p className="text-red-500 text-xs italic">{errors.email?.message}</p>
         </div>
@@ -65,9 +65,8 @@ const AdminLoginPage = () => {
             type="password"
             placeholder="******************"
             {...register("password")}
-            className={`shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline ${
-              errors.password?.message ? "border-red-500" : ""
-            }`}
+            className={`shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline ${errors.password?.message ? "border-red-500" : ""
+              }`}
           />
           <p className="text-red-500 text-xs italic">
             {errors.password?.message}
